@@ -129,8 +129,8 @@ def GetFiancialReport(ticker):
     firefox_options.add_argument("--headless")
 
     driver = webdriver.Firefox(
-        options=firefox_options,)
-        # executable_path='/app/vendor/geckodriver/geckodriver')
+        options=firefox_options,
+        executable_path="/app/vendor/geckodriver/geckodriver")
 
     try:
         driver.get(reuters_income_url)
