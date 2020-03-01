@@ -125,13 +125,24 @@ def GetFiancialReport(ticker):
     kpi_data = []
     column_year = []
 
-    firefox_options = webdriver.FirefoxOptions()
-    firefox_options.add_argument("--headless")
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
-    driver = webdriver.Firefox(
-        firefox_binary="/app/vendor/firefox/firefox",
-        options=firefox_options,
-        executable_path="/app/vendor/geckodriver/geckodriver")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH,
+                              chrome_options=chrome_options)
+
+    # firefox_options = webdriver.FirefoxOptions()
+    # firefox_options.add_argument("--headless")
+
+    # driver = webdriver.Firefox(
+    #     firefox_binary="/app/vendor/firefox/firefox",
+    #     options=firefox_options,
+    #     executable_path="/app/vendor/geckodriver/geckodriver")
 
     try:
         driver.get(reuters_income_url)
