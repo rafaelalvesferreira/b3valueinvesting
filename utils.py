@@ -129,6 +129,7 @@ def GetFiancialReport(ticker):
     firefox_options.add_argument("--headless")
 
     driver = webdriver.Firefox(
+        firefox_binary="/app/vendor/firefox/firefox",
         options=firefox_options,
         executable_path="/app/vendor/geckodriver/geckodriver")
 
