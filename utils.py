@@ -130,7 +130,7 @@ def GetFiancialReport(ticker):
 
     driver = webdriver.Firefox(
         options=firefox_options,
-        executable_path='geckodriver')
+        executable_path='/app/vendor/geckodriver/geckodriver')
 
     try:
         driver.get(reuters_income_url)
