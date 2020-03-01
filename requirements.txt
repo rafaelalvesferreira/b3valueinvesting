@@ -3,7 +3,7 @@ astroid==2.3.3
 attrs==19.3.0
 backcall==0.1.0
 beautifulsoup4==4.8.2
-blas==1.0
+blas==0.8.5
 bleach==3.1.0
 ca-certificates==2020.1.1
 certifi==2019.11.28
@@ -26,6 +26,7 @@ flask-compress==1.4.0
 fontconfig==2.13.0
 freetype==2.9.1
 future==0.18.2
+gunicorn==19.8.1
 glib==2.63.1
 gmp==6.1.2
 gst-plugins-base==1.14.0
