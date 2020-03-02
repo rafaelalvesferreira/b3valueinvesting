@@ -125,16 +125,15 @@ def GetFiancialReport(ticker):
     kpi_data = []
     column_year = []
 
-    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
+    #CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.binary_location = GOOGLE_CHROME_PATH
 
-    driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH,
-                              chrome_options=chrome_options)
+    driver = webdriver.Chrome(chrome_options=chrome_options)
 
     # firefox_options = webdriver.FirefoxOptions()
     # firefox_options.add_argument("--headless")
