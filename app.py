@@ -115,7 +115,7 @@ app.layout = html.Div([
             ],
         ),
         html.P(''),
-        html.H3('Taxa do Cálculo de Desconto'),
+        html.H3('Inflação Prevista Para os Próximos 5 anos'),
         dcc.Slider(
             id='discountrate-slider',
             min=0,
@@ -124,7 +124,7 @@ app.layout = html.Div([
             step=0.05,
             marks={i: f'{i:.2f}' for i in np.arange(0, 1, 0.05)}
         ),
-        html.H3('Taxa do Cálculo de Margem'),
+        html.H3('Margem de Erro na Estimativa da Inflação'),
         dcc.Slider(
             id='marginrate-slider',
             min=0,
@@ -134,15 +134,16 @@ app.layout = html.Div([
             marks={i: f'{i:.2f}' for i in np.arange(0, 1, 0.05)}
         ),
     ], style={'width': '59%', 'float': 'right', 'display': 'inline-block'}),
-    dash_table.DataTable(
+    html.Div([
+        dash_table.DataTable(
             id='future-price-table',
             columns=[
                 {'id': 'annual_growth_rate', 'name': 'Taxa de Crescimento Anual', 'type': 'numeric', },
                 {'id': 'last_eps', 'name': 'Último EPS', 'type': 'numeric', },
                 {'id': 'future_eps', 'name': 'EPS Futuro', 'type': 'numeric', },
                 {'id': 'pe_ratio', 'name': 'Taxa P/E', 'type': 'numeric', },
-                {'id': 'FV', 'name': 'FV', 'type': 'numeric', },
-                {'id': 'PV', 'name': 'PV', 'type': 'numeric', },
+                {'id': 'FV', 'name': 'Est Valor Ação 10 anos', 'type': 'numeric', },
+                {'id': 'PV', 'name': 'Preço Alvo Atual da Ação', 'type': 'numeric', },
                 {'id': 'margin_price', 'name': 'Valor Marginal', 'type': 'numeric', },
                 {'id': 'last_share_price', 'name': 'Últ Valor Ação', 'type': 'numeric', },
                 {'id': 'decision', 'name': 'Decisão', 'type': 'text', },
@@ -163,6 +164,7 @@ app.layout = html.Div([
                 'backgroundColor': 'blue',
                 'color': 'white',
             },
+        )], style={'width': '95%', 'float': 'right', 'display': 'inline-block'}
     )
 ])
 
@@ -235,3 +237,6 @@ def CreateDecision(ticker, data_table, discount_rate, margin_rate):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
+
+# %%

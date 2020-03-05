@@ -1,6 +1,7 @@
 # %%
 from collections import defaultdict
 from datetime import datetime as dt
+import os
 import urllib3
 import certifi
 from bs4 import BeautifulSoup
@@ -11,7 +12,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
 import numpy as np
-
 import pandas_datareader as dr
 from dateutil.relativedelta import relativedelta
 
@@ -105,6 +105,9 @@ def GetFiancialReport(ticker):
     :return: dataframe with all data gathered
     :rtype: pandas dataframe
     """
+    # #checking environment:
+    # is_prod = os.environ.get('IS_HEROKU', None)
+
     income_stat_annual = ['Net Income',
                           'Interest Exp.(Inc.),Net-Operating, Total',
                           'Diluted Normalized EPS',
@@ -125,23 +128,23 @@ def GetFiancialReport(ticker):
     kpi_data = []
     column_year = []
 
-    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
-    #CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+    # # applying the correct webdriver to the env
+    # if is_prod:
+    #     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.binary_location = GOOGLE_CHROME_PATH
+    #     chrome_options = webdriver.ChromeOptions()
+    #     chrome_options.add_argument('--disable-gpu')
+    #     chrome_options.add_argument('--no-sandbox')
+    #     chrome_options.binary_location = GOOGLE_CHROME_PATH
 
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    #     driver = webdriver.Chrome(chrome_options=chrome_options)
+    # else:
+    firefox_options = webdriver.FirefoxOptions()
+    firefox_options.add_argument("--headless")
 
-    # firefox_options = webdriver.FirefoxOptions()
-    # firefox_options.add_argument("--headless")
-
-    # driver = webdriver.Firefox(
-    #     firefox_binary="/app/vendor/firefox/firefox",
-    #     options=firefox_options,
-    #     executable_path="/app/vendor/geckodriver/geckodriver")
+    driver = webdriver.Firefox(
+        options=firefox_options,
+        executable_path="/home/rafael/projetos/dash/geckodriver")
 
     try:
         driver.get(reuters_income_url)
@@ -233,7 +236,7 @@ def CheckWarningFlags(data_table):
     # Checking ROE mean
     df['ROE'] = df['ROE'].map(lambda x: float(x))
     if df.ROE.mean() < 0.15:
-        reason_dict_list.append(dict(reason=f'A média do ROE é de {df.ROE.mean():.2f}, menor que 0,13'))
+        reason_dict_list.append(dict(reason=f'A média do ROE é de {df.ROE.mean():.2f}, menor que 0,15'))
 
     # Checking ROA mean
     df['ROA'] = df['ROA'].map(lambda x: float(x))
@@ -245,7 +248,7 @@ def CheckWarningFlags(data_table):
     df['Net Income'] = df['Net Income'].map(lambda x: x.replace(',', '')).astype(float)
 
     if df['Total Long Term Debt'].head(1).values[0] > 5 * df['Net Income'].head(1).values[0]:
-        reason_dict_list.append(dict(reason=f'A Dívida de Longo Prazo é cinco vezes o Lucro Líquido.'))
+        reason_dict_list.append(dict(reason=f'A Dívida de Longo Prazo maior que cinco vezes o Lucro Líquido.'))
 
     return reason_dict_list
 
@@ -264,8 +267,8 @@ def FuturePricing(ticker, data_table, discount_rate, margin_rate):
 
     years = 10
     margin_price = 0
-    pv = float(df['Diluted Normalized EPS'].iloc[0]) # last EPS
-    fv = float(df['Diluted Normalized EPS'].iloc[-1])
+    fv = float(df['Diluted Normalized EPS'].iloc[0]) # last EPS
+    pv = float(df['Diluted Normalized EPS'].iloc[-1]) # first EPS
 
     annual_growth_rate = np.rate(5, 0, -pv, fv)
 
