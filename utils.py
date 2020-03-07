@@ -1,4 +1,3 @@
-# %%
 from collections import defaultdict
 from datetime import datetime as dt
 import os
@@ -15,7 +14,7 @@ import numpy as np
 import pandas_datareader as dr
 from dateutil.relativedelta import relativedelta
 
-#%%
+
 def GetTickers():
     """Scrap the B3 stock tickers from Yahoo Finanças
 
@@ -38,7 +37,6 @@ def GetTickers():
     yahooFinanceUrl = 'https://br.financas.yahoo.com/industries/'
 
     # List to store the dropdown menu values
-    # stockInfo = [{'value': '^BVSP', 'label': '^BVSP | Ibovespa'}]
     stockInfo = []
 
     http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED',
@@ -106,7 +104,7 @@ def GetFiancialReport(ticker):
     :rtype: pandas dataframe
     """
     # #checking environment:
-    # is_prod = os.environ.get('IS_HEROKU', None)
+    is_prod = os.environ.get('IS_HEROKU', None)
 
     income_stat_annual = ['Net Income',
                           'Interest Exp.(Inc.),Net-Operating, Total',
@@ -128,19 +126,19 @@ def GetFiancialReport(ticker):
     kpi_data = []
     column_year = []
 
-    # # applying the correct webdriver to the env
-    # if is_prod:
-    #     GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
+    # applying the correct webdriver to the env
+    if is_prod:
+        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google-chrome'
 
-    #     chrome_options = webdriver.ChromeOptions()
-    #     chrome_options.add_argument('--disable-gpu')
-    #     chrome_options.add_argument('--no-sandbox')
-    #     chrome_options.binary_location = GOOGLE_CHROME_PATH
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.binary_location = GOOGLE_CHROME_PATH
 
-    #     driver = webdriver.Chrome(chrome_options=chrome_options)
-    # else:
-    firefox_options = webdriver.FirefoxOptions()
-    firefox_options.add_argument("--headless")
+        driver = webdriver.Chrome(chrome_options=chrome_options)
+    else:
+        firefox_options = webdriver.FirefoxOptions()
+        firefox_options.add_argument("--headless")
 
     driver = webdriver.Firefox(
         options=firefox_options,
@@ -253,15 +251,6 @@ def CheckWarningFlags(data_table):
     return reason_dict_list
 
 
-# %%
-# # inputs
-# ticker = 'PETR4.SA'
-# dados = GetFiancialReport(ticker)
-# # %%
-# discount_rate = 0.15
-# margin_rate = 0.15
-
-# %%
 def FuturePricing(ticker, data_table, discount_rate, margin_rate):
     df = pd.DataFrame.from_dict(data_table)
 
@@ -313,19 +302,3 @@ def FuturePricing(ticker, data_table, discount_rate, margin_rate):
                   decision=decision)]
 
     return answer
-
-# # %%
-# ticker = 'PETR4.SA'
-# dados = GetFiancialReport(ticker)
-# # %%
-# dados_up = dados.to_dict()
-
-# # %%
-# discount_rate = 0.15
-# margin_rate = 0.15
-# ans = FuturePricing(ticker, dados_up, discount_rate, margin_rate)
-
-# # %%
-# ans
-
-# # %%
