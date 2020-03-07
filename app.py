@@ -21,7 +21,7 @@ app.title = 'B3 Value Investing'
 ## Set up the layout
 app.layout = html.Div([
     html.Div([
-        dcc.Loading(id="loading-1", children=[html.Div(id="loading-output-1")], type='circle'),
+        #dcc.Loading(id="loading-1", children=[html.Div(id='future-price-table')], type='circle'),
         html.H1('B3 Value Investing'),
         # Create the ticker dropdown
         html.H3('Escolha uma ação'),
@@ -142,7 +142,7 @@ app.layout = html.Div([
                 {'id': 'last_eps', 'name': 'Último EPS', 'type': 'numeric', },
                 {'id': 'future_eps', 'name': 'EPS Futuro', 'type': 'numeric', },
                 {'id': 'pe_ratio', 'name': 'Taxa P/E', 'type': 'numeric', },
-                {'id': 'FV', 'name': 'Est Valor Ação 10 anos', 'type': 'numeric', },
+                {'id': 'FV', 'name': 'Est Valor Ação 5 anos', 'type': 'numeric', },
                 {'id': 'PV', 'name': 'Preço Alvo Atual da Ação', 'type': 'numeric', },
                 {'id': 'margin_price', 'name': 'Valor Marginal', 'type': 'numeric', },
                 {'id': 'last_share_price', 'name': 'Últ Valor Ação', 'type': 'numeric', },
