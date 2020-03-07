@@ -43,8 +43,8 @@ Lista das ações e nomes das empresas
 ## Máquina de Decisão baseada em Preço Marginal do EPS
 * Tomada de decisão de cada empresa em termos de taxa de retorno, dada a metodologia de Sean Seah
     * Encontrar a taxa anual de crescimento composta por EPS
-    * Estimatimar o EPS daqui a 10 anos
-    * Estimativa do preço das ações daqui a 10 anos (Valor EPS da ação * P/E médio)
+    * Estimatimar o EPS daqui a 5 anos
+    * Estimativa do preço das ações daqui a 5 anos (Valor EPS da ação * P/E médio)
     * Determine a meta por preço hoje com base nos retornos (taxa de desconto de 15% / 20%)
     * Adicione margem de segurança (rede de segurança 15%)
     * Compre se o preço de mercado for menor que o preço marginal
