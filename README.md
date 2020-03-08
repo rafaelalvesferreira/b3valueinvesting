@@ -49,3 +49,5 @@ Lista das ações e nomes das empresas
     * Adicione margem de segurança (rede de segurança 15%)
     * Compre se o preço de mercado for menor que o preço marginal
     * Venda se o preço de mercado for superior ao preço marginal
+
+#### Aviso Legal: O autor não se responsabiliza por erros, omissões ou pelos resultados obtidos com o uso dessas informações.

@@ -229,7 +229,7 @@ def CheckWarningFlags(data_table):
         for year in range(len(warning_data)-1, -1, -1):
             eps_string = eps_string + str(warning_data[year]) + ', '
 
-        reason_dict_list.append(dict(reason=f'Há redução do crescimento em {eps_string}'))
+        reason_dict_list.append(dict(reason=f'Há redução na taxa de crescimento em {eps_string}'))
 
     # Checking ROE mean
     df['ROE'] = df['ROE'].map(lambda x: float(x))

@@ -120,7 +120,7 @@ app.layout = html.Div([
             id='discountrate-slider',
             min=0,
             max=1,
-            value=0.15,
+            value=0.20,
             step=0.05,
             marks={i: f'{i:.2f}' for i in np.arange(0, 1, 0.05)}
         ),
@@ -164,7 +164,9 @@ app.layout = html.Div([
                 'backgroundColor': 'blue',
                 'color': 'white',
             },
-        )], style={'width': '95%', 'float': 'right', 'display': 'inline-block'}
+        ),
+        html.Div([html.H6('Aviso Legal: O autor não se responsabiliza por erros, omissões ou pelos resultados obtidos com o uso dessas informações.')]),
+        ], style={'width': '95%', 'float': 'right', 'display': 'inline-block'}
     )
 ])
 
