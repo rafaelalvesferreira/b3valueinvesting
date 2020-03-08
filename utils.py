@@ -71,7 +71,7 @@ def ScrapTableValues(key_perf_indicator, driver, url):
     kpi_data = []
     try:
         driver.get(url)
-        WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
+        WebDriverWait(driver, 15).until(EC.visibility_of_element_located(
             (By.XPATH,
              '//*[@id="__next"]/div/div[4]/div[1]/div/div/section/div[2]\
              /div[3]')))
@@ -146,7 +146,7 @@ def GetFiancialReport(ticker):
 
     try:
         driver.get(reuters_income_url)
-        WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
+        WebDriverWait(driver, 15).until(EC.visibility_of_element_located(
             (By.XPATH,
              '//*[@id="__next"]/div/div[4]/div[1]/div/div/section/div[2]\
              /div[3]')))
