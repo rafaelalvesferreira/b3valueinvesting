@@ -18,7 +18,7 @@ server = app.server
 
 app.title = 'B3 Value Investing'
 
-## Set up the layout
+# Set up the layout
 app.layout = html.Div([
     html.Div([
         #dcc.Loading(id="loading-1", children=[html.Div(id='future-price-table')], type='circle'),

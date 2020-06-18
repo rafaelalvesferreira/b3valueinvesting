@@ -292,13 +292,13 @@ def FuturePricing(ticker, data_table, discount_rate, margin_rate):
     decision = np.where(last_share_price < margin_price, 'COMPRAR', 'VENDER')
 
     answer = [dict(annual_growth_rate=np.round(annual_growth_rate, 2),
-                  last_eps=np.round(pv, 2),
-                  future_eps=np.round(future_eps, 2),
-                  pe_ratio=np.round(pe_ratio, 2),
-                  FV=np.round(FV, 2),
-                  PV=np.round(PV, 2),
-                  margin_price=np.round(margin_price, 2),
-                  last_share_price=np.round(last_share_price, 2),
-                  decision=decision)]
+                   last_eps=np.round(fv, 2),
+                   future_eps=np.round(future_eps, 2),
+                   pe_ratio=np.round(pe_ratio, 2),
+                   FV=np.round(FV, 2),
+                   PV=np.round(PV, 2),
+                   margin_price=np.round(margin_price, 2),
+                   last_share_price=np.round(last_share_price, 2),
+                   decision=decision)]
 
     return answer
