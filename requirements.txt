@@ -33,7 +33,7 @@ numpy==1.14.3
 pandas==0.24.2
 pandas-datareader==0.7.0
 plotly==3.9.0
-protobuf==3.5.2.post1
+protobuf==3.18.3
 pydotplus==2.0.2
 pyparsing==2.4.0
 pyrsistent==0.15.2
